@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "SDLP_Texture.h"
+#include "../surface/SDLP_Surface.h"
 #include <SDL.h>
 #include <vector>
 #include <string>
@@ -13,11 +14,11 @@ namespace SDLP {
         TextureList();
         void Init(SDL_Renderer* render);
         //methods
-        int CreateTexture(SDLP::Surface surface,int w,int h);// returns created texture id
+        int CreateTexture(SDLP::Surface * surface,int w,int h);// returns created texture id
 
         //getters
-        Texture* GetTexture(int lid) { return &list_[lid]; }
-        Texture* GetTextureByGid(int gid);
+        SDLP::Texture* GetTexture(int lid) { return &list_[lid]; }
+        SDLP::Texture* GetTextureByGid(int gid);
 
         //user block
         void PostInit();

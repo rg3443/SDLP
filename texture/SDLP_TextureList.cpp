@@ -11,12 +11,12 @@ void TextureList::Init(SDL_Renderer* render)
 {
     this->render = render;
     //test texture
-    Surface surf("misc\\icons\\clanFlags\\hardbass.png",0,0,100,100,PNG);
-        this->CreateTexture(surf,700,700);
+    Surface surf("misc\\icons\\clanFlags\\blord.png",0,0,100,100,PNG);
+        this->CreateTexture(&surf,700,700);
     std::cout << "Test texture with id " << 0 << " was created." << std::endl;
 }
 
-int TextureList::CreateTexture(SDLP::Surface surface,int w,int h)
+int TextureList::CreateTexture(SDLP::Surface * surface,int w,int h)
 {
     int id = list_.size();
     list_.push_back(Texture(surface,render,w,h));

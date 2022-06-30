@@ -9,12 +9,23 @@ Texture::Texture()
     id = -1;
 }
 
-void Texture::Init(SDLP::Surface surface,SDL_Renderer* render,int w,int h)
+Texture::~Texture()
 {
-    SDLP::SetRectSize(surface.GetRect(),0,0,w,h);
-    this->rect = *(surface.GetRect());
+    if (destroyable) {
+        SDL_DestroyTexture(object);
+        eternalObject = nullptr;
+    }
+}
+
+void Texture::Init(SDLP::Surface * surface,SDL_Renderer* render,int w,int h)
+{
+    if (surface->GetType() == SDLP::SurfaceType::TXT) destroyable = true;
+    else destroyable = false;
+
+    SDLP::SetRectSize(surface->GetRect(),0,0,w,h);
+    this->rect = *(surface->GetRect());
     //if(surface.GetType() != SurfaceType::PNG)
-    object = SDL_CreateTextureFromSurface(render,surface.GetObj());
+    object = SDL_CreateTextureFromSurface(render,surface->GetObj());
    // else
         //object = SDL_Load
     if(object == nullptr || object == NULL) {
